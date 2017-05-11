@@ -18,7 +18,9 @@ CFLAGS = -Wall
 
 # define the C source files
 SRCS = main.cpp \
-	   automaton.cpp
+	   automaton.cpp \
+	   nfa.cpp \
+	   dfa.cpp
 
 OBJS = $(SRCS:%.cpp=$(OBJS_DIR)/%.o)
 

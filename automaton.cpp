@@ -1,3 +1,9 @@
+/*********************************************************************
+ * MODULE: automaton.cpp
+ * PURPOSE: Implement class Automaton here
+ * AUTHER: Zeyu Zhang
+ * DATE STARTED: 2017-05-11
+ *********************************************************************/
 #include "automaton.h"
 
 using namespace std;
@@ -123,6 +129,8 @@ void Automaton::showAutomaton()
 		else
 			cout << "\t   -" << endl;
 	}
+	
+	cout << stars << endl;
 }
 
 /**

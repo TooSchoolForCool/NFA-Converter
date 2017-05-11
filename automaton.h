@@ -1,3 +1,9 @@
+/*********************************************************************
+ * MODULE: automaton.h
+ * PURPOSE: Define automaton class here
+ * AUTHER: Zeyu Zhang
+ * DATE STARTED: 2017-05-11
+ *********************************************************************/
 #ifndef _AUTOMATON_H
 #define _AUTOMATON_H
 

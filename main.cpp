@@ -1,16 +1,26 @@
+/*********************************************************************
+ * MODULE: main.cpp
+ * PURPOSE: main() function define here
+ * AUTHER: Zeyu Zhang
+ * DATE STARTED: 2017-05-11
+ *********************************************************************/
 #include <iostream>
 
-#include "automaton.h"
+#include "nfa.h"
 
 using namespace std;
 
 int main()
 {
-	Automaton atm;
+	NFA nfa;
+	DFA dfa;
 	
-	atm.load("./tests/nfa1.atm");
+	nfa.load("./tests/nfa1.atm");
 
-	atm.showAutomaton();
+	nfa.showAutomaton();
+
+	nfa.convert2DFA(dfa);
 
 	return 0;
 }
+
