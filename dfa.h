@@ -1,6 +1,6 @@
 /*********************************************************************
  * MODULE: dfa.h
- * PURPOSE: Define class DFA here
+ * PURPOSE: Define class DFA here, which is derived from Automaton
  * AUTHER: Zeyu Zhang
  * DATE STARTED: 2017-05-12
  *********************************************************************/
@@ -20,7 +20,8 @@ public:
 	~DFA();
 
 public:
-
+	void showAutomaton();
+	
 private:
 };
 

@@ -22,6 +22,7 @@ void NFA::convert2DFA(DFA &dfa)
 {
 	queue<string> state_queue;
 	map<string, bool> checked_states;
+	map<PSC, string> new_transitions;
 
 	state_queue.push( _epsilonClosure(startState_) );
 	checked_states[_epsilonClosure(startState_)] = true;
@@ -31,15 +32,15 @@ void NFA::convert2DFA(DFA &dfa)
 		string cur_state = state_queue.front();
 		state_queue.pop();
 
-		cout << "pop: " << cur_state << endl;
+		// cout << "pop: " << cur_state << endl;
 
 		for(int i = 0; i < alphabets_.size(); i++)
 		{
-			cerr << "current: " << cur_state;
+			// cerr << "current: " << cur_state;
 
 			string next_state = _gotoNextStates(cur_state, alphabets_[i]);
 
-			cerr << " read: " << alphabets_[i];
+			// cerr << " read: " << alphabets_[i];
 
 			next_state = _epsilonClosure(next_state);
 
@@ -47,14 +48,14 @@ void NFA::convert2DFA(DFA &dfa)
 			{
 				state_queue.push(next_state);
 				checked_states[next_state] = true;
-				cerr << " push: " << next_state << endl;
+				// cerr << " push: " << next_state << endl;
 			}
-			else
-			{
-				cerr << " get: " << next_state << endl;
-			}
+
+			new_transitions[PSC(cur_state, alphabets_[i])] = next_state;
 		}
 	}
+
+	_generateDFA(dfa, checked_states, new_transitions);
 }
 
 string NFA::_epsilonClosure(string state)
@@ -147,4 +148,62 @@ string NFA::_gotoNextStates(string state, char ch)
 	}
 
 	return _mergeState(split_states);
+}
+
+void NFA::_generateDFA(DFA &dfa, map<string, bool> new_states, map<PSC, string> new_transitions)
+{
+	map<string, string> renaming_table;
+	int state_cnt = 0;
+
+	for(map<string, bool>::iterator iter = new_states.begin(); iter != new_states.end(); iter++)
+	{
+		renaming_table[iter->first] = int2string(state_cnt);
+
+		// set new states
+		dfa.addNewState(int2string(state_cnt++));
+
+		// set final states
+		vector<string> split_states;
+		_splitState(iter->first, split_states);
+		for(int i = 0; i < split_states.size(); i++)
+		{
+			if( _isAccepted(split_states[i]) )
+			{
+				dfa.setAcceptedState( int2string(state_cnt - 1) );
+				break;
+			}
+		}
+	}
+
+	// set start states
+	dfa.setStartState( renaming_table[_epsilonClosure(startState_)] );
+
+	// set alphabets
+	dfa.setAlphabets(alphabets_);
+
+	// add transitions
+	for(map<PSC, string>::iterator iter = new_transitions.begin(); iter != new_transitions.end(); iter++)
+		dfa.addTransition(renaming_table[iter->first.first], renaming_table[iter->second], iter->first.second);
+}
+
+string int2string(int n)
+{
+	string ret = "";
+
+	do
+	{
+		ret += char(n % 10 + '0');
+		n /= 10;
+	}while(n);
+
+	int i = 0, j = ret.length() - 1;
+
+	while(i < j)
+	{
+		int tmp = ret[i];
+		ret[i++] = ret[j];
+		ret[j--] = tmp;
+	}
+
+	return ret;
 }

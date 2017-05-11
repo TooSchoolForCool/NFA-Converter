@@ -14,6 +14,8 @@
 #include <algorithm>
 #include <queue>
 
+std::string int2string(int n);
+
 class NFA: public Automaton
 {
 public:
@@ -28,6 +30,8 @@ private:
 	void _splitState(const std::string &src_state, std::vector<std::string> &dst_states);
 	std::string _mergeState(std::vector<std::string> &src_states);
 	std::string _gotoNextStates(std::string state, char ch);
+	void _generateDFA(DFA &dfa, std::map<std::string, bool> new_states,
+		std::map<PSC, std::string> new_transitions);
 };
 
 #endif	//	_NFA_H

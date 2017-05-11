@@ -20,6 +20,7 @@ int main()
 	nfa.showAutomaton();
 
 	nfa.convert2DFA(dfa);
+	dfa.showAutomaton();
 
 	return 0;
 }
