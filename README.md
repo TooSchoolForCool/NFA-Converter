@@ -53,4 +53,5 @@ ab			// line #1: the alphabets set
 
 3 3 b
 
-***Note: For $\epsilon$ transition, use \* to represent.***
+***Note:  Use \* to represent $\epsilon$ transition.***
+
