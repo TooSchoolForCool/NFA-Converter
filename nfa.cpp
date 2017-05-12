@@ -185,25 +185,3 @@ void NFA::_generateDFA(DFA &dfa, map<string, bool> new_states, map<PSC, string> 
 	for(map<PSC, string>::iterator iter = new_transitions.begin(); iter != new_transitions.end(); iter++)
 		dfa.addTransition(renaming_table[iter->first.first], renaming_table[iter->second], iter->first.second);
 }
-
-string int2string(int n)
-{
-	string ret = "";
-
-	do
-	{
-		ret += char(n % 10 + '0');
-		n /= 10;
-	}while(n);
-
-	int i = 0, j = ret.length() - 1;
-
-	while(i < j)
-	{
-		int tmp = ret[i];
-		ret[i++] = ret[j];
-		ret[j--] = tmp;
-	}
-
-	return ret;
-}

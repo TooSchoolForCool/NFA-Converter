@@ -22,6 +22,11 @@ int main()
 	nfa.convert2DFA(dfa);
 	dfa.showAutomaton();
 
+	dfa.minimize();
+	dfa.showAutomaton();
+
+	// cout << (dfa.checkString("aba") ? "Accepted" : "Refused") << endl;
+
 	return 0;
 }
 

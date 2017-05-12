@@ -280,3 +280,25 @@ bool Automaton::_isAlphabetExist(char ch)
 	else
 		return true;		
 }
+
+string int2string(int n)
+{
+	string ret = "";
+
+	do
+	{
+		ret += char(n % 10 + '0');
+		n /= 10;
+	}while(n);
+
+	int i = 0, j = ret.length() - 1;
+
+	while(i < j)
+	{
+		int tmp = ret[i];
+		ret[i++] = ret[j];
+		ret[j--] = tmp;
+	}
+
+	return ret;
+}

@@ -21,8 +21,15 @@ public:
 
 public:
 	void showAutomaton();
+	void minimize();
+	bool checkString(std::string str);
 	
 private:
+	void _partition(std::vector<std::vector<std::string> > &dst);
+	void _separate(std::vector<std::string> &src, std::vector<std::string> &dst_a,
+		std::vector<std::string> &dst_b, const std::vector<std::vector<std::string> > &lookup_dict);
+	int _getIndexInLookupDict(const std::vector<std::vector<std::string> > &lookup_dict, std::string state);
+	void _updateDFA(std::vector<std::vector<std::string> > &partition);
 };
 
 #endif	//	_DFA_H

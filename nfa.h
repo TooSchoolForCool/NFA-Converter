@@ -14,8 +14,6 @@
 #include <algorithm>
 #include <queue>
 
-std::string int2string(int n);
-
 class NFA: public Automaton
 {
 public:

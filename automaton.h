@@ -20,6 +20,8 @@
 
 typedef std::pair<std::string, char> PSC;
 
+std::string int2string(int n);
+
 class Automaton
 {
 public:
